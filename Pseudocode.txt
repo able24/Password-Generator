@@ -1,0 +1,16 @@
+// Password Generator PSEUDOCODE
+
+// Create Array variables
+   - Array of uppercase english letters
+   - Array of lowercase english letters
+   - Array of numbers to be included in password (0-9)
+   - Array of special characters to be included in password
+
+//Prompt user to chose what he/she wants in his/her password (user must pick at least from one of the arrays)
+
+
+// Generate password
+
+// Write password to screen
+   
+
