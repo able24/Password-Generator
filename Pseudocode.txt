@@ -1,10 +1,14 @@
 // Password Generator PSEUDOCODE
 
-// Create Array variables
-   - Array of uppercase english letters
-   - Array of lowercase english letters
-   - Array of numbers to be included in password (0-9)
-   - Array of special characters to be included in password
+// Create a getPassword function with Array variables
+   - Prompt to ask length of password needed
+   - Ask user to confirm if they want uppercase english letters in their password
+   - Ask user to confirm if they want lowercase english letters in their password
+   - Ask users if numbers are to be included in password (0-9)
+   - Ask users to confirm if special characters are to be included in password
+   - Each response should be saved in a variable
+   - Return an array of all the variables of responses received
+
 
 //Prompt user to chose what he/she wants in his/her password (user must pick at least from one of the arrays)
 
