@@ -90,54 +90,59 @@ var upperCasedCharacters = [
 
 // Function to prompt user for password options
 function getPasswordOptions() {
-  var passwordLength = Number(prompt("How many characters do you want for your password? Note: it must be between 10 and 64"));
-  if (passwordLength.length >= 10 && passwordLength.length <= 64) {
-    var lowerCase = confirm ("Would you like lowercase letters for your password?");
-    var upperCase = confirm ("Would you like uppercase letters for your password?");
-    var numericChar = confirm ("Would you like numbers for your password?");
-    var specialChar = confirm ("Would you like special characters for your password?");
-    var passwordOptions = [lowerCase, upperCase, numericChar, specialChar];
-  return passwordOptions;
+  var charLength = Number(prompt("How many characters do you want for your password? Note: it must be between 10 and 64"));
+  if (charLength == null) {
+    return alert("You must enter a password length between 10 and 64"); //Check condition if no password length is entered
+  } else if (charLength < 10 || charLength > 64 || isNaN(charLength)) {
+    return alert("You must enter a password length between 10 and 64"); //Check to keep password length between 10 and 64
   } else {
-    alert ("Your password length is not up to the required length. Please choose password lenght between 10 and 64!");
+    var lowerCase = confirm("Click 'ok' if you would like lowercase letters for your password");
+    var upperCase = confirm("Click 'ok' if you would like uppercase letters for your password");    // User prompted to enter various password options
+    var numericChar = confirm("Click 'ok' if you would like numbers for your password");
+    var specialChar = confirm("Click 'ok' if you would like special characters for your password");
+    var characterChoice = [charLength, lowerCase, upperCase, numericChar, specialChar];
+    return characterChoice;  // function returns password options chosen by user
   }
-
-
 }
+
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-  var randomPass = "";
-  for (var i = 0; i < passwordLength.length; i++) {
-    if (lowerCase === true) {
-      for (var x of lowerCasedCharacters) {
-        randomPass += lowerCasedCharacters.charAt(Math.floor(Nath.random() * lowerCasedCharacters.length));
+  var index = [Math.floor(Maths.random() * arr.length)];
+  return arr[index];
+
+}
+
+    // Function to generate password with user input
+    function generatePassword() {
+      var passwordOptions = getPasswordOptions();  // calling the getPasswordOption function
+
+      var characterSets = {
+        lowerCase: lowerCasedCharacters,
+        upperCase: upperCasedCharacters,
+        numericChar: numericCharacters,
+        specialChar: specialCharacters
+      };                  // Array option converted to object
+
+      var password = '';   // Password container created to store generated characters to form password
+      var characterSet = characterSets.toString(); // Object of options converted to string
+      for (var i = 0; i < passwordOptions[0]; i++) {
+        password += characterSet.charAt(Math.floor(Math.random() * characterSet.length));   // Looping through character options
       }
-    } else if (upperCase === true) {
-      for (var x of upperCasedCharacters) {
-        randomPass += upperCasedCharacters.charAt(Math.floor(Nath.random() * upperCasedCharacters.length));
-      }
+      return password;
     }
-  }
 
 
-}
+    // Get references to the #generate element
+    var generateBtn = document.querySelector('#generate');
 
-// Function to generate password with user input
-function generatePassword() {
+    // Write password to the #password input
+    function writePassword() {
+      var password = generatePassword();
+      var passwordText = document.querySelector('#password');
 
-}
+      passwordText.value = password;
+    }
 
-// Get references to the #generate element
-var generateBtn = document.querySelector('#generate');
-
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector('#password');
-
-  passwordText.value = password;
-}
-
-// Add event listener to generate button
-generateBtn.addEventListener('click', writePassword);
+    // Add event listener to generate button
+    generateBtn.addEventListener('click', writePassword);
